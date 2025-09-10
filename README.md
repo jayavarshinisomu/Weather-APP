@@ -1,27 +1,31 @@
 Weather App
+This Weather Application is built using HTML, CSS, and JavaScript, integrating live weather data from the OpenWeatherMap API. It provides real-time weather information based on user input for city and country.
 
-This is a simple, responsive Weather Application built with  HTML, CSS, and JavaScript, integrating live weather data using the  Open Weather Map API
+♦ Features
+Fetches current temperature, humidity, and weather conditions for user-specified locations.
 
- Features
+Validates city and country input to improve accuracy.
 
-- Real-time weather data by city name and country code
-- Displays temperature, humidity, and weather conditions dynamically
-- Validates user input for correct city and country format
-- Responsive design for desktop and mobile devices
-- Clean UI with focused user experience
+Displays data dynamically without page reload using JavaScript and API integration.
 
- Technologies Used
+Responsive design for seamless experience across desktop and mobile devices.
 
-- HTML5 for page structure
-- CSS3 for styling and responsiveness
-- JavaScript (ES6) for DOM manipulation and API calls
-- OpenWeatherMap API for live weather data retrieval
+Simple and clean user interface focused on usability.
 
- Why This Project?
+♦ Technologies Used
+HTML5 for structure
 
-This project demonstrates:
+CSS3 for styling and responsive design
 
-- Experience with consuming third-party RESTful APIs using JavaScript
-- Dynamic HTML content updating via DOM manipulation
-- Input validation to improve user experience
-- Responsive web design principles
+JavaScript for dynamic content and API calls
+
+OpenWeatherMap API for real-time weather data
+
+Project Highlights
+Demonstrates ability to consume RESTful APIs with JavaScript.
+
+Implements DOM manipulation for dynamic UI updates.
+
+Provides responsive and user-friendly web app interface.
+
+Validates and handles user input efficiently.
