@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weather App</title>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <p>Type a city name and country code (e.g., London,GB):</p>
+  <input type="text" id="cityInput" placeholder="Enter city,country code" />
+  <button id="searchBtn">Search Weather</button>
+
+  <div id="weatherResult"></div>
+
+  <textarea id="diaryNote" rows="3" cols="40" placeholder="Write your note about today’s weather..."></textarea>
+  <br />
+  <button id="saveNote">Save Note</button>
+  <p id="noteMsg" style="color: green;"></p>
+
+  <script>
+    const searchBtn = document.getElementById('searchBtn');
+
+    searchBtn.addEventListener('click', function() {
+      const cityName = document.getElementById('cityInput').value.trim();
+      if (!cityName) {
+        alert('Please enter a city name and optional country code (e.g., London,GB)');
+        return;
+      }
+      const apiKey = 'f774432544da7f298dbd2d7445a147cc'; // Replace with your OpenWeather API key
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('City not found or invalid API key. Check spelling or API key.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const weatherDiv = document.getElementById('weatherResult');
+          weatherDiv.innerHTML =
+            `<h2>Weather in ${data.name}</h2>
+             <p>Temperature: ${data.main.temp}°C</p>
+             <p>Humidity: ${data.main.humidity}%</p>
+             <p>Condition: ${data.weather[0].description}</p>`;
+
+          loadDiaryNote(data.name);
+        })
+        .catch(error => {
+          alert('Error: ' + error.message);
+        });
+    });
+
+    document.getElementById('saveNote').onclick = function() {
+      const city = document.getElementById('cityInput').value.trim();
+      if (!city) {
+        alert('Please enter a city name first!');
+        return;
+      }
+      const dateKey = city + '_' + new Date().toISOString().slice(0, 10);
+      const note = document.getElementById('diaryNote').value;
+      localStorage.setItem(dateKey, note);
+      document.getElementById('noteMsg').textContent = "Note saved!";
+    };
+
+    function loadDiaryNote(city) {
+      const dateKey = city + '_' + new Date().toISOString().slice(0, 10);
+      const savedNote = localStorage.getItem(dateKey);
+      document.getElementById('diaryNote').value = savedNote || '';
+      document.getElementById('noteMsg').textContent = savedNote ? "Note loaded for today!" : '';
+    }
+  </script>
+</body>
+</html>
